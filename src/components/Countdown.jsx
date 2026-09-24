@@ -1,47 +1,87 @@
+import { Card, Grid, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 
-export const Countdown = ({ targetDate }) => {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-  function calculateTimeLeft() {
-    const difference = +new Date(targetDate) - +new Date();
-    let timeLeft = {};
-
-    if (difference > 0) {
-      timeLeft = {
-        días: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        horas: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutos: Math.floor((difference / 1000 / 60) % 60),
-        segundos: Math.floor((difference / 1000) % 60),
-      };
-    } else {
-      timeLeft = { días: 0, horas: 0, minutos: 0, segundos: 0 };
-    }
-    return timeLeft;
-  }
+export const Countdown = () => {
+  // Lógica de cuenta regresiva
+  const targetDate = new Date("2026-10-05T00:00:00");
+  const [timeLeft, setTimeLeft] = useState({
+    días: 0,
+    horas: 0,
+    minutos: 0,
+    segundos: 0,
+  });
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      const diff = +targetDate - +new Date();
+      if (diff > 0) {
+        setTimeLeft({
+          días: Math.floor(diff / (1000 * 60 * 60 * 24)),
+          horas: Math.floor((diff / (1000 * 60 * 60)) % 24),
+          minutos: Math.floor((diff / 1000 / 60) % 60),
+          segundos: Math.floor((diff / 1000) % 60),
+        });
+      }
     }, 1000);
     return () => clearInterval(timer);
-  }, [targetDate]);
+  }, []);
 
   return (
-    <div className='grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto my-8'>
-      {Object.entries(timeLeft).map(([label, value]) => (
-        <div
-          key={label}
-          className='glass-card rounded-2xl p-4 md:p-6 text-center transform hover:-translate-y-1 transition-all duration-300 border border-wapizima-500/20'
-        >
-          <span className='block text-3xl md:text-5xl font-extrabold text-white tracking-wider font-serif'>
-            {String(value || 0).padStart(2, "0")}
-          </span>
-          <span className='text-xs md:text-sm text-wapizima-400 font-semibold uppercase tracking-widest mt-1 block'>
-            {label}
-          </span>
-        </div>
+    <Grid
+      container
+      spacing={2}
+      sx={{
+        maxWidth: "800px",
+        mx: "auto",
+        my: 4,
+        justifyContent: "center",
+      }}
+    >
+      {Object.entries(timeLeft).map(([label, val]) => (
+        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={label}>
+          <Card
+            sx={{
+              py: 2.5,
+              px: 1,
+              textAlign: "center",
+              background: "rgba(26, 8, 18, 0.7)",
+              backdropFilter: "blur(16px)",
+              border: "1px solid rgba(225, 33, 139, 0.3)",
+              borderRadius: "20px",
+              boxShadow: "0 8px 20px rgba(0, 0, 0, 0.5)",
+              transition: "transform 0.3s ease",
+              "&:hover": {
+                transform: "translateY(-4px)",
+                borderColor: "rgba(225, 33, 139, 0.7)",
+              },
+            }}
+          >
+            <Typography
+              variant='h3'
+              sx={{
+                fontWeight: 800,
+                color: "#ffffff",
+                fontFamily: "'Playfair Display', serif",
+              }}
+            >
+              {String(val).padStart(2, "0")}
+            </Typography>
+            <Typography
+              variant='caption'
+              sx={{
+                textTransform: "uppercase",
+                fontWeight: 700,
+                color: "#E53888",
+                letterSpacing: 2,
+                display: "block",
+                mt: 0.5,
+              }}
+            >
+              {label}
+            </Typography>
+          </Card>
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 };
