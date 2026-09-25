@@ -14,7 +14,7 @@ export default function App() {
       {/* TITULO Y SUBTITULO OVERLAY */}
       <Banner />
       {/* REPRODUCTOR DE VIDEO CON GLOW / RESPLANDOR */}
-      {now >= "2026-10-05" && <CourseViewer />}
+      {now >= "2026-09-05" && <CourseViewer />}
 
       {/* BADGE CON LA FECHA */}
       <BadgeDate />

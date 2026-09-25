@@ -1,12 +1,12 @@
 import React from "react";
 import PlayerVideo from "../player/PlayerVideo";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 const CourseViewer = () => {
   return (
     <Box
       sx={{
-        maxWidth: "960px",
+        maxWidth: "1200px",
         mx: "auto",
         my: 4,
         p: 0.5,
@@ -16,15 +16,20 @@ const CourseViewer = () => {
         boxShadow: "0 0 35px rgba(225, 33, 139, 0.35)",
       }}
     >
-      <Box
-        sx={{
-          borderRadius: "20px",
-          overflow: "hidden",
-          bgcolor: "#000",
-        }}
-      >
-        <PlayerVideo />
-      </Box>
+      <Grid container spacing={2}>
+        <Grid size={9}>
+          <Box
+            sx={{
+              borderRadius: "20px",
+              overflow: "hidden",
+              bgcolor: "#000",
+            }}
+          >
+            <PlayerVideo />
+          </Box>
+        </Grid>
+        {/* <Grid size={3}>Aqui iran las lecciones</Grid> */}
+      </Grid>
     </Box>
   );
 };
