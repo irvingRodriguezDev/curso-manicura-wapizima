@@ -1,6 +1,7 @@
 import React from "react";
 import PlayerVideo from "../player/PlayerVideo";
 import { Box, Grid } from "@mui/material";
+import CoursePlaylist from "../coursePlaylist/CoursePlaylist";
 
 const CourseViewer = () => {
   return (
@@ -28,7 +29,9 @@ const CourseViewer = () => {
             <PlayerVideo />
           </Box>
         </Grid>
-        {/* <Grid size={3}>Aqui iran las lecciones</Grid> */}
+        <Grid size={3}>
+          <CoursePlaylist />
+        </Grid>
       </Grid>
     </Box>
   );

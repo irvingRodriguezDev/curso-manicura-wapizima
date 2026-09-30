@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 export const Countdown = () => {
   // Lógica de cuenta regresiva
-  const targetDate = new Date("2026-10-05T00:00:00");
+  const targetDate = new Date("2026-10-05T12:00:00");
   const [timeLeft, setTimeLeft] = useState({
     días: 0,
     horas: 0,
